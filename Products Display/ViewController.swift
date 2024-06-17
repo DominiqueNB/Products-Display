@@ -8,12 +8,19 @@
 import UIKit
 
 class ViewController: UIViewController {
+    private lazy var sampleView: View = {
+        return View()
+    }()
+
+    override func loadView() {
+        super.loadView()
+
+        self.view = sampleView
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+
+        sampleView.setup(labelText: "Busca de Produtos", buttonTitle: "Buscar")
     }
-
-
 }
-
