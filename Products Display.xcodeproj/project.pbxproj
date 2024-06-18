@@ -15,6 +15,7 @@
 		268ED43A2C20ED6000A34A50 /* ViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268ED4372C20ED6000A34A50 /* ViewConfiguration.swift */; };
 		268ED43B2C20ED6000A34A50 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268ED4382C20ED6000A34A50 /* ViewController.swift */; };
 		268ED43C2C20ED6000A34A50 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268ED4392C20ED6000A34A50 /* SceneDelegate.swift */; };
+		268ED43E2C21C0A500A34A50 /* Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268ED43D2C21C0A500A34A50 /* Interactor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		268ED4372C20ED6000A34A50 /* ViewConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewConfiguration.swift; sourceTree = "<group>"; };
 		268ED4382C20ED6000A34A50 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		268ED4392C20ED6000A34A50 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		268ED43D2C21C0A500A34A50 /* Interactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interactor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				268ED4392C20ED6000A34A50 /* SceneDelegate.swift */,
 				268ED4372C20ED6000A34A50 /* ViewConfiguration.swift */,
 				268ED4382C20ED6000A34A50 /* ViewController.swift */,
+				268ED43D2C21C0A500A34A50 /* Interactor.swift */,
 				268ED4262C20EB3900A34A50 /* Assets.xcassets */,
 				268ED4282C20EB3900A34A50 /* LaunchScreen.storyboard */,
 				268ED42B2C20EB3900A34A50 /* Info.plist */,
@@ -148,6 +151,7 @@
 				268ED4222C20EB3800A34A50 /* ViewController.swift in Sources */,
 				268ED41E2C20EB3800A34A50 /* AppDelegate.swift in Sources */,
 				268ED4202C20EB3800A34A50 /* SceneDelegate.swift in Sources */,
+				268ED43E2C21C0A500A34A50 /* Interactor.swift in Sources */,
 				268ED43C2C20ED6000A34A50 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

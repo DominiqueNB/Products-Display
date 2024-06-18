@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: self.view.frame.height - 60))
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
@@ -25,6 +25,8 @@ class ViewController: UIViewController {
         return button
     }()
 
+    let interactor: InteractorProtocol = Interactor()
+
     override func loadView() {
         super.loadView()
 
@@ -35,21 +37,23 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
         self.navigationItem.title = "Busca de Produtos"
+        interactor.fetchItems()
     }
 }
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return interactor.items.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        cell.textLabel?.text = interactor.items[indexPath.row]
+        return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("Num: \(indexPath.row)")
-        print("Value: ")
     }
 
     @objc
