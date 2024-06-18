@@ -17,6 +17,8 @@
 		268ED43E2C21C0A500A34A50 /* Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268ED43D2C21C0A500A34A50 /* Interactor.swift */; };
 		268ED4402C223F2600A34A50 /* Initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268ED43F2C223F2600A34A50 /* Initializer.swift */; };
 		268ED4422C223F6500A34A50 /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268ED4412C223F6500A34A50 /* Presenter.swift */; };
+		26D5112D2C2242F4007746D0 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D5112C2C2242F4007746D0 /* HTTPClient.swift */; };
+		26D5112F2C224925007746D0 /* SearchItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D5112E2C224925007746D0 /* SearchItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		268ED43D2C21C0A500A34A50 /* Interactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interactor.swift; sourceTree = "<group>"; };
 		268ED43F2C223F2600A34A50 /* Initializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Initializer.swift; sourceTree = "<group>"; };
 		268ED4412C223F6500A34A50 /* Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
+		26D5112C2C2242F4007746D0 /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
+		26D5112E2C224925007746D0 /* SearchItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +78,8 @@
 				268ED4262C20EB3900A34A50 /* Assets.xcassets */,
 				268ED4282C20EB3900A34A50 /* LaunchScreen.storyboard */,
 				268ED42B2C20EB3900A34A50 /* Info.plist */,
+				26D5112C2C2242F4007746D0 /* HTTPClient.swift */,
+				26D5112E2C224925007746D0 /* SearchItem.swift */,
 			);
 			path = "Products Display";
 			sourceTree = "<group>";
@@ -161,7 +167,9 @@
 				268ED4402C223F2600A34A50 /* Initializer.swift in Sources */,
 				268ED43B2C20ED6000A34A50 /* ViewController.swift in Sources */,
 				268ED43A2C20ED6000A34A50 /* ViewConfiguration.swift in Sources */,
+				26D5112F2C224925007746D0 /* SearchItem.swift in Sources */,
 				268ED4222C20EB3800A34A50 /* ViewController.swift in Sources */,
+				26D5112D2C2242F4007746D0 /* HTTPClient.swift in Sources */,
 				268ED41E2C20EB3800A34A50 /* AppDelegate.swift in Sources */,
 				268ED43E2C21C0A500A34A50 /* Interactor.swift in Sources */,
 				268ED43C2C20ED6000A34A50 /* SceneDelegate.swift in Sources */,
