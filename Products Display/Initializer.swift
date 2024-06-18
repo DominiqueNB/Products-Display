@@ -9,9 +9,9 @@ import UIKit
 
 struct Initializer {
     static func make() -> UIViewController? {
-        let interactor = Interactor()
         let presenter = Presenter()
-        let viewController = ViewController()
+        let interactor = Interactor(presenter: presenter)
+        let viewController = ViewController(interactor: interactor)
 
         presenter.viewController = viewController
 

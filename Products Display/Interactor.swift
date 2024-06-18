@@ -15,8 +15,11 @@ protocol InteractorProtocol {
 
 final class Interactor: InteractorProtocol {
     var items: [String] = []
-    let presenter: PresenterProtocol = Presenter()
+    let presenter: PresenterProtocol
 
+    init(presenter: PresenterProtocol) {
+        self.presenter = presenter
+    }
 
     func fetchItems() {
         items.append("Item1")

@@ -38,8 +38,17 @@ final class ViewController: UIViewController {
         return button
     }()
 
-    let interactor: InteractorProtocol = Interactor()
+    let interactor: InteractorProtocol
     private var searchTerm: String = ""
+
+    init(interactor: InteractorProtocol) {
+        self.interactor = interactor
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func loadView() {
         super.loadView()

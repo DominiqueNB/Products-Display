@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		268ED41E2C20EB3800A34A50 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268ED41D2C20EB3800A34A50 /* AppDelegate.swift */; };
-		268ED4202C20EB3800A34A50 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268ED41F2C20EB3800A34A50 /* SceneDelegate.swift */; };
 		268ED4222C20EB3800A34A50 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268ED4212C20EB3800A34A50 /* ViewController.swift */; };
 		268ED4272C20EB3900A34A50 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 268ED4262C20EB3900A34A50 /* Assets.xcassets */; };
 		268ED42A2C20EB3900A34A50 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 268ED4292C20EB3900A34A50 /* Base */; };
@@ -23,7 +22,6 @@
 /* Begin PBXFileReference section */
 		268ED41A2C20EB3800A34A50 /* Products Display.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Products Display.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		268ED41D2C20EB3800A34A50 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		268ED41F2C20EB3800A34A50 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SceneDelegate.swift; path = ../SceneDelegate.swift; sourceTree = "<group>"; };
 		268ED4212C20EB3800A34A50 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		268ED4262C20EB3900A34A50 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		268ED4292C20EB3900A34A50 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -84,7 +82,6 @@
 			isa = PBXGroup;
 			children = (
 				268ED41D2C20EB3800A34A50 /* AppDelegate.swift */,
-				268ED41F2C20EB3800A34A50 /* SceneDelegate.swift */,
 				268ED4392C20ED6000A34A50 /* SceneDelegate.swift */,
 			);
 			path = Configuration;
@@ -166,7 +163,6 @@
 				268ED43A2C20ED6000A34A50 /* ViewConfiguration.swift in Sources */,
 				268ED4222C20EB3800A34A50 /* ViewController.swift in Sources */,
 				268ED41E2C20EB3800A34A50 /* AppDelegate.swift in Sources */,
-				268ED4202C20EB3800A34A50 /* SceneDelegate.swift in Sources */,
 				268ED43E2C21C0A500A34A50 /* Interactor.swift in Sources */,
 				268ED43C2C20ED6000A34A50 /* SceneDelegate.swift in Sources */,
 			);
