@@ -7,9 +7,22 @@
 
 import UIKit
 
+protocol ViewControllerProtocol: AnyObject {
+    func reloadTableView()
+}
+
 final class ViewController: UIViewController {
+    private lazy var textField: UITextField = {
+        let textField = UITextField(frame: CGRect(x: 10, y: 100, width: UIScreen.main.bounds.size.width - 20, height: 60))
+        textField.placeholder = "Buscar"
+        textField.borderStyle = .roundedRect
+        textField.clearButtonMode = .whileEditing
+        textField.delegate = self
+        return textField
+    }()
+
     private lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: self.view.frame.height - 60))
+        let tableView = UITableView(frame: CGRect(x: 10, y: 160, width: UIScreen.main.bounds.size.width - 20, height: self.view.frame.height - 300))
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         tableView.delegate = self
         tableView.dataSource = self
@@ -26,6 +39,7 @@ final class ViewController: UIViewController {
     }()
 
     let interactor: InteractorProtocol = Interactor()
+    private var searchTerm: String = ""
 
     override func loadView() {
         super.loadView()
@@ -36,12 +50,11 @@ final class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationItem.title = "Busca de Produtos"
         interactor.fetchItems()
     }
 }
 
-extension ViewController: UITableViewDelegate, UITableViewDataSource {
+extension ViewController: UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return interactor.items.count
     }
@@ -56,26 +69,62 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         print("Num: \(indexPath.row)")
     }
 
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.becomeFirstResponder()
+    }
+
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        searchTerm = textField.text ?? ""
+        textField.resignFirstResponder()
+
+        return true
+    }
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        searchTerm = textField.text ?? ""
+        textField.resignFirstResponder()
+
+        return true
+    }
+
     @objc
     func didTapButton() {
-        self.navigationItem.title = "Itens encontrados"
+        interactor.search(searchTerm)
     }
 }
 
 extension ViewController: ViewConfiguration {
     func addSubviews() {
+        self.view.addSubview(textField)
         self.view.addSubview(tableView)
         self.view.addSubview(button)
     }
 
     func setupConstraints() {
         NSLayoutConstraint.activate([
-            button.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -24),
+            self.view.topAnchor.constraint(equalTo: self.view.topAnchor),
+            self.view.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            self.view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            self.view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+
+            textField.topAnchor.constraint(equalTo: self.view.topAnchor, constant: -16),
+            textField.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+
+            tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -60),
+
+            button.topAnchor.constraint(equalTo: self.tableView.bottomAnchor, constant: 24),
             button.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
         ])
     }
 
     func setupStyle() {
         self.view.backgroundColor = .white
+        self.navigationItem.title = "Busca de Produtos"
+    }
+}
+
+extension ViewController: ViewControllerProtocol {
+    func reloadTableView() {
+        tableView.reloadData()
     }
 }
