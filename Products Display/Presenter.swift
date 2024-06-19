@@ -9,6 +9,7 @@ import Foundation
 
 protocol PresenterProtocol {
     func presentItems()
+    func present(errorMessage: String)
 }
 
 final class Presenter: PresenterProtocol {
@@ -16,5 +17,9 @@ final class Presenter: PresenterProtocol {
 
     func presentItems() {
         viewController?.reloadTableView()
+    }
+
+    func present(errorMessage: String) {
+//        viewController?.renderError(message: "")
     }
 }

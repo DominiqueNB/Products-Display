@@ -11,8 +11,7 @@ struct Initializer {
     static func make() -> UIViewController? {
         let presenter = Presenter()
         let httpClient = URLSessionHTTPClient()
-        let url = "api.mercadolibre.com/sites/MLA/search?=q"
-        let service = Service(url: URL(string: url)!, client: httpClient)
+        let service = Service(client: httpClient)
         let interactor = Interactor(presenter: presenter, service: service)
         let viewController = ViewController(interactor: interactor)
 

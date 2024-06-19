@@ -8,13 +8,12 @@
 import Foundation
 
 protocol InteractorProtocol {
-    var items: [String] { get }
-    func fetchItems() -> [String]
+    var items: [Results] { get }
     func search(_ term: String)
 }
 
 final class Interactor: InteractorProtocol {
-    var items: [String] = []
+    var items: [Results] = []
     let presenter: PresenterProtocol
     let service: ServiceProtocol
 
@@ -23,16 +22,18 @@ final class Interactor: InteractorProtocol {
         self.service = service
     }
 
-    func fetchItems() -> [String] {
-        return items
-    }
-
     func search(_ term: String) {
         items.removeAll()
-        items.append("\(term)1")
-        items.append("\(term)2")
-        items.append("\(term)3")
 
-        presenter.presentItems()
+        service.load(item: term) { [weak self] result in
+            switch result {
+            case .success(let results):
+                self?.items = results
+                self?.presenter.presentItems()
+            case .failure(let error):
+                self?.items.removeAll()
+                self?.presenter.present(errorMessage: error.localizedDescription)
+            }
+        }
     }
 }

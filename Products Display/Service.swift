@@ -8,11 +8,10 @@
 import Foundation
 
 protocol ServiceProtocol {
-    func load(completion: @escaping (ProductResult) -> Void)
+    func load(item: String, completion: @escaping (ProductResult) -> Void)
 }
 
 public final class Service: ServiceProtocol {
-    private let url: URL
     private let client: HTTPClient
 
     public enum Error: Swift.Error {
@@ -22,12 +21,13 @@ public final class Service: ServiceProtocol {
 
     public typealias Result = ProductResult
 
-    public init(url: URL, client: HTTPClient) {
-        self.url = url
+    public init(client: HTTPClient) {
         self.client = client
     }
 
-    public func load(completion: @escaping (Result) -> Void) {
+    public func load(item: String, completion: @escaping (Result) -> Void) {
+        let url: URL = .init(string: "https://api.mercadolibre.com/sites/MLA/search?q=\(item)")!
+
         client.get(from: url) { [weak self] result in
             guard self != nil else { return }
 
@@ -59,24 +59,19 @@ private extension Array where Element == Results {
                   thumbnailID: $0.thumbnailID,
                   catalogProductID: $0.catalogProductID,
                   listingTypeID: $0.listingTypeID,
-                  permalink: $0.permalink,
                   buyingMode: $0.buyingMode,
                   siteID: $0.siteID,
                   categoryID: $0.categoryID,
                   domainID: $0.domainID,
                   thumbnail: $0.thumbnail,
-                  currencyID: $0.currencyID,
                   orderBackend: $0.orderBackend,
                   price: $0.price,
                   availableQuantity: $0.availableQuantity,
                   useThumbnailID: $0.useThumbnailID,
                   acceptsMercadopago: $0.acceptsMercadopago,
-                  shipping: $0.shipping,
-                  stopTime: $0.stopTime,
                   seller: $0.seller,
                   attributes: $0.attributes,
-                  installments: $0.installments,
-                  catalogListing: $0.catalogListing)
+                  installments: $0.installments)
         }
     }
 }
@@ -92,7 +87,7 @@ final class ItemsMapper {
 
     static func map(_ data: Data, from response: HTTPURLResponse) throws -> [Results] {
         guard response.statusCode == OK_200,
-              let search = try? JSONDecoder().decode(Search.self, from: data) else {
+              let search: Search = try? JSONDecoder().decode(Search.self, from: data) else {
             throw Service.Error.invalidData
         }
 

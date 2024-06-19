@@ -39,7 +39,7 @@ final class ViewController: UIViewController {
     }()
 
     let interactor: InteractorProtocol
-    private var searchTerm: String = ""
+    private var searchTerm: String?
 
     init(interactor: InteractorProtocol) {
         self.interactor = interactor
@@ -58,8 +58,6 @@ final class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        interactor.fetchItems()
     }
 }
 
@@ -70,7 +68,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource, UITextFiel
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.textLabel?.text = interactor.items[indexPath.row]
+        cell.textLabel?.text = interactor.items[indexPath.row].title
         return cell
     }
 
@@ -79,18 +77,19 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource, UITextFiel
     }
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        searchTerm = textField.text
         textField.becomeFirstResponder()
     }
 
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        searchTerm = textField.text ?? ""
+        searchTerm = textField.text
         textField.resignFirstResponder()
 
         return true
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        searchTerm = textField.text ?? ""
+        searchTerm = textField.text
         textField.resignFirstResponder()
 
         return true
@@ -98,6 +97,9 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource, UITextFiel
 
     @objc
     func didTapButton() {
+        guard let searchTerm, searchTerm.isEmpty == false else {
+            return
+        }
         interactor.search(searchTerm)
     }
 }
@@ -134,6 +136,8 @@ extension ViewController: ViewConfiguration {
 
 extension ViewController: ViewControllerProtocol {
     func reloadTableView() {
-        tableView.reloadData()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
 }
