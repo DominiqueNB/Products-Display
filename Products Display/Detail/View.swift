@@ -9,16 +9,38 @@ import Foundation
 import UIKit
 
 class View: UIView {
-    private lazy var label: UILabel = {
+    let stackView: UIStackView = {
+        let stackView = UIStackView(frame: CGRect(x: 10, y: 20, width: UIScreen.main.bounds.size.width - 20, height: UIScreen.main.bounds.size.height - 100))
+        stackView.axis = .vertical
+        stackView.alignment = .leading
+        stackView.spacing = 12
+        return stackView
+    }()
+
+    private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .systemFont(ofSize: 24)
+        return label
+    }()
+
+    private lazy var idLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 10)
+        return label
+    }()
+
+    private lazy var buyingModeLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 14)
         return label
     }()
 
     private lazy var button: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitleColor(.blue, for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .systemBlue
+        button.layer.cornerRadius = 20
         return button
     }()
 
@@ -31,24 +53,30 @@ class View: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func setup(labelText: String, buttonTitle: String) {
-        label.text = labelText
-        button.setTitle(buttonTitle, for: .normal)
+    func render(item: ItemViewModel) {
+        titleLabel.text = item.title
+        idLabel.text = item.id
+        buyingModeLabel.text = item.buyingMode
+        button.setTitle("Comprar", for: .normal)
     }
 }
 extension View: ViewConfiguration {
     func addSubviews() {
-        addSubview(label)
-        addSubview(button)
+        addSubview(stackView)
+        stackView.addArrangedSubview(titleLabel)
+        stackView.addArrangedSubview(idLabel)
+        stackView.addArrangedSubview(buyingModeLabel)
+        stackView.addArrangedSubview(button)
     }
 
     func setupConstraints() {
         NSLayoutConstraint.activate([
-            label.topAnchor.constraint(equalTo: self.topAnchor, constant: 200),
-            label.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
+            stackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            stackView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
 
-            button.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 8),
-            button.centerXAnchor.constraint(equalTo: centerXAnchor)
+            button.heightAnchor.constraint(equalToConstant: 40),
+            button.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -40),
+            button.centerXAnchor.constraint(equalTo: self.centerXAnchor)
         ])
     }
 

@@ -10,14 +10,16 @@ import Foundation
 protocol PresenterProtocol {
     func presentItems()
     func present(errorMessage: String)
-}
-
-struct ItemViewModel {
-    let title: String
+    func presentDetailed(_ item: Results)
 }
 
 final class Presenter: PresenterProtocol {
     weak var viewController: ViewControllerProtocol?
+    let coordinator: CoordinatorProtocol
+
+    init(coordinator: CoordinatorProtocol) {
+        self.coordinator = coordinator
+    }
 
     func presentItems() {
         viewController?.reloadTableView()
@@ -25,5 +27,9 @@ final class Presenter: PresenterProtocol {
 
     func present(errorMessage: String) {
         viewController?.renderError(message: errorMessage)
+    }
+
+    func presentDetailed(_ item: Results) {
+        coordinator.navigateToDetail(item: ItemViewModel(item: item))
     }
 }

@@ -26,7 +26,9 @@ public final class Service: ServiceProtocol {
     }
 
     public func load(item: String, completion: @escaping (Result) -> Void) {
-        let url: URL = .init(string: "https://api.mercadolibre.com/sites/MLA/search?q=\(item)")!
+        var url: URL = .init(string: "https://api.mercadolibre.com/sites/MLA/search?")!
+        let queryItem = URLQueryItem.init(name: "q", value: item.trimmingCharacters(in: .whitespacesAndNewlines))
+        url.append(queryItems: [queryItem])
 
         client.get(from: url) { [weak self] result in
             guard self != nil else { return }
@@ -55,10 +57,7 @@ private extension Array where Element == Results {
         map {
             .init(id: $0.id,
                   title: $0.title,
-                  condition: $0.condition,
-                  thumbnailID: $0.thumbnailID,
                   catalogProductID: $0.catalogProductID,
-                  listingTypeID: $0.listingTypeID,
                   buyingMode: $0.buyingMode,
                   siteID: $0.siteID,
                   categoryID: $0.categoryID,
@@ -70,8 +69,8 @@ private extension Array where Element == Results {
                   useThumbnailID: $0.useThumbnailID,
                   acceptsMercadopago: $0.acceptsMercadopago,
                   seller: $0.seller,
-                  attributes: $0.attributes,
-                  installments: $0.installments)
+                  installments: $0.installments,
+                  attribute: $0.attribute)
         }
     }
 }

@@ -33,6 +33,6 @@ final class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        detailView.setup(labelText: "Busca de Produtos", buttonTitle: "Buscar")
+        detailView.render(item: item)
     }
 }

@@ -22,6 +22,7 @@
 		26D511332C2324D0007746D0 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D511322C2324D0007746D0 /* Coordinator.swift */; };
 		26D511352C2324FC007746D0 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D511342C2324FC007746D0 /* DetailViewController.swift */; };
 		26D5113A2C23276D007746D0 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D511392C23276D007746D0 /* View.swift */; };
+		26D5113C2C237347007746D0 /* ItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D5113B2C237347007746D0 /* ItemViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		26D511322C2324D0007746D0 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		26D511342C2324FC007746D0 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		26D511392C23276D007746D0 /* View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
+		26D5113B2C237347007746D0 /* ItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 				268ED43F2C223F2600A34A50 /* Initializer.swift */,
 				268ED43D2C21C0A500A34A50 /* Interactor.swift */,
 				268ED4412C223F6500A34A50 /* Presenter.swift */,
+				26D5113B2C237347007746D0 /* ItemViewModel.swift */,
 				26D5112E2C224925007746D0 /* SearchItem.swift */,
 				26D511302C230818007746D0 /* Service.swift */,
 				268ED4212C20EB3800A34A50 /* ViewController.swift */,
@@ -199,6 +202,7 @@
 				26D5113A2C23276D007746D0 /* View.swift in Sources */,
 				26D511352C2324FC007746D0 /* DetailViewController.swift in Sources */,
 				268ED4422C223F6500A34A50 /* Presenter.swift in Sources */,
+				26D5113C2C237347007746D0 /* ItemViewModel.swift in Sources */,
 				268ED4402C223F2600A34A50 /* Initializer.swift in Sources */,
 				268ED43A2C20ED6000A34A50 /* ViewConfiguration.swift in Sources */,
 				26D5112F2C224925007746D0 /* SearchItem.swift in Sources */,
