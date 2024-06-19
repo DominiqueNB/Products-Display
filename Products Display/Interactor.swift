@@ -9,22 +9,22 @@ import Foundation
 
 protocol InteractorProtocol {
     var items: [String] { get }
-    func fetchItems()
+    func fetchItems() -> [String]
     func search(_ term: String)
 }
 
 final class Interactor: InteractorProtocol {
     var items: [String] = []
     let presenter: PresenterProtocol
+    let service: ServiceProtocol
 
-    init(presenter: PresenterProtocol) {
+    init(presenter: PresenterProtocol, service: ServiceProtocol) {
         self.presenter = presenter
+        self.service = service
     }
 
-    func fetchItems() {
-        items.append("Item1")
-        items.append("Item2")
-        items.append("Item3")
+    func fetchItems() -> [String] {
+        return items
     }
 
     func search(_ term: String) {
