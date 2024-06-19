@@ -12,6 +12,10 @@ protocol PresenterProtocol {
     func present(errorMessage: String)
 }
 
+struct ItemViewModel {
+    let title: String
+}
+
 final class Presenter: PresenterProtocol {
     weak var viewController: ViewControllerProtocol?
 
@@ -20,6 +24,6 @@ final class Presenter: PresenterProtocol {
     }
 
     func present(errorMessage: String) {
-//        viewController?.renderError(message: "")
+        viewController?.renderError(message: errorMessage)
     }
 }

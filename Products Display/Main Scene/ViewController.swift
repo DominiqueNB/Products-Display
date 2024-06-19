@@ -9,9 +9,11 @@ import UIKit
 
 protocol ViewControllerProtocol: AnyObject {
     func reloadTableView()
+    func present(viewController: UIViewController)
+    func renderError(message: String)
 }
 
-final class ViewController: UIViewController {
+final class ViewController: UIViewController, ViewControllerProtocol {
     private lazy var textField: UITextField = {
         let textField = UITextField(frame: CGRect(x: 10, y: 100, width: UIScreen.main.bounds.size.width - 20, height: 60))
         textField.placeholder = "Buscar"
@@ -59,41 +61,6 @@ final class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-}
-
-extension ViewController: UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return interactor.items.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.textLabel?.text = interactor.items[indexPath.row].title
-        return cell
-    }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("Num: \(indexPath.row)")
-    }
-
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        searchTerm = textField.text
-        textField.becomeFirstResponder()
-    }
-
-    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        searchTerm = textField.text
-        textField.resignFirstResponder()
-
-        return true
-    }
-
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        searchTerm = textField.text
-        textField.resignFirstResponder()
-
-        return true
-    }
 
     @objc
     func didTapButton() {
@@ -101,6 +68,71 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource, UITextFiel
             return
         }
         interactor.search(searchTerm)
+    }
+
+    func reloadTableView() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+
+    func present(viewController: UIViewController) {
+        navigationController?.present(viewController, animated: true)
+    }
+
+    func renderError(message: String) {
+        let alert = UIAlertController(title: "Erro", message: "Ocorreu um erro em sua busca", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+}
+
+extension ViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return interactor.items.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        cell.textLabel?.text = interactor.items[indexPath.row].title
+        return cell
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        interactor.didSelectItem(at: indexPath.row)
+    }
+}
+
+extension ViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        searchTerm = textField.text
+        textField.becomeFirstResponder()
+    }
+
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        if textField.text == "" {
+            button.isEnabled = false
+            return false
+        } else {
+            searchTerm = textField.text
+            textField.resignFirstResponder()
+            button.isEnabled = true
+
+            return true
+        }
+    }
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField.text == "" {
+            button.isEnabled = false
+            return false
+        } else {
+            searchTerm = textField.text
+            textField.resignFirstResponder()
+            button.isEnabled = true
+
+            return true
+        }
     }
 }
 
@@ -131,13 +163,5 @@ extension ViewController: ViewConfiguration {
     func setupStyle() {
         self.view.backgroundColor = .white
         self.navigationItem.title = "Busca de Produtos"
-    }
-}
-
-extension ViewController: ViewControllerProtocol {
-    func reloadTableView() {
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
     }
 }

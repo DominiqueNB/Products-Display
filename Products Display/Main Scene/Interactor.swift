@@ -10,14 +10,17 @@ import Foundation
 protocol InteractorProtocol {
     var items: [Results] { get }
     func search(_ term: String)
+    func didSelectItem(at index: Int)
 }
 
 final class Interactor: InteractorProtocol {
     var items: [Results] = []
+    let coordinator: CoordinatorProtocol
     let presenter: PresenterProtocol
     let service: ServiceProtocol
 
-    init(presenter: PresenterProtocol, service: ServiceProtocol) {
+    init(coordinator: CoordinatorProtocol, presenter: PresenterProtocol, service: ServiceProtocol) {
+        self.coordinator = coordinator
         self.presenter = presenter
         self.service = service
     }
@@ -35,5 +38,11 @@ final class Interactor: InteractorProtocol {
                 self?.presenter.present(errorMessage: error.localizedDescription)
             }
         }
+    }
+
+    func didSelectItem(at index: Int) {
+        let item = items[index]
+
+        coordinator.navigateToDetail(item: ItemViewModel(title: item.title ?? "Item"))
     }
 }
