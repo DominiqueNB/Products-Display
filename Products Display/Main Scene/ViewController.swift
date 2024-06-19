@@ -34,8 +34,9 @@ final class ViewController: UIViewController, ViewControllerProtocol {
     private lazy var button: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Pesquisar", for: .normal)
-        button.setTitleColor(.blue, for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .systemBlue
+        button.layer.cornerRadius = 20
         button.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
         return button
     }()
@@ -64,10 +65,15 @@ final class ViewController: UIViewController, ViewControllerProtocol {
 
     @objc
     func didTapButton() {
-        guard let searchTerm, searchTerm.isEmpty == false else {
+        var term: String = ""
+        if let searchTerm, searchTerm.isEmpty == false {
+            term = searchTerm
+        } else if let textFieldText = textField.text, textFieldText.isEmpty == false {
+            term = textFieldText
+        } else {
             return
         }
-        interactor.search(searchTerm)
+        interactor.search(term)
     }
 
     func reloadTableView() {
@@ -81,9 +87,11 @@ final class ViewController: UIViewController, ViewControllerProtocol {
     }
 
     func renderError(message: String) {
-        let alert = UIAlertController(title: "Erro", message: "Ocorreu um erro em sua busca", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Nenhum resultado", message: "Tente usar outras palavras", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-        present(alert, animated: true, completion: nil)
+        DispatchQueue.main.async {
+            self.present(alert, animated: true, completion: nil)
+        }
     }
 }
 
@@ -109,30 +117,17 @@ extension ViewController: UITextFieldDelegate {
         textField.becomeFirstResponder()
     }
 
-    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        if textField.text == "" {
-            button.isEnabled = false
-            return false
-        } else {
-            searchTerm = textField.text
-            textField.resignFirstResponder()
-            button.isEnabled = true
-
-            return true
-        }
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        searchTerm = textField.text
+        textField.resignFirstResponder()
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField.text == "" {
-            button.isEnabled = false
-            return false
-        } else {
-            searchTerm = textField.text
-            textField.resignFirstResponder()
-            button.isEnabled = true
+        searchTerm = textField.text
+        textField.resignFirstResponder()
+        button.isEnabled = true
 
-            return true
-        }
+        return true
     }
 }
 
@@ -156,6 +151,8 @@ extension ViewController: ViewConfiguration {
             tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -60),
 
             button.topAnchor.constraint(equalTo: self.tableView.bottomAnchor, constant: 24),
+            button.heightAnchor.constraint(equalToConstant: 40),
+            button.widthAnchor.constraint(equalTo: self.view.widthAnchor, constant: -40),
             button.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
         ])
     }
@@ -163,5 +160,6 @@ extension ViewController: ViewConfiguration {
     func setupStyle() {
         self.view.backgroundColor = .white
         self.navigationItem.title = "Busca de Produtos"
+        button.setTitle("Pesquisar", for: .normal)
     }
 }
