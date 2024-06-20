@@ -16,6 +16,7 @@ final class Coordinator: CoordinatorProtocol {
 
     func navigateToDetail(item: ItemViewModel) {
         let destinationController = DetailInitializer.make(item: item)
+
         viewController?.present(viewController: destinationController)
     }
 }

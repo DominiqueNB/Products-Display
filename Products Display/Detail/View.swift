@@ -26,6 +26,7 @@ class View: UIView {
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 24)
+        label.numberOfLines = 0
         return label
     }()
 
@@ -89,8 +90,8 @@ class View: UIView {
         image.image = item.image
         titleLabel.text = item.title
         idLabel.text = "Id: \(item.id)"
-        availableQuantityLabel.text = "Quantidade: \(item.availableQuantity)"
-        priceLabel.text = "Por: $ \(item.price)"
+        availableQuantityLabel.text = "Cantidad: \(item.availableQuantity)"
+        priceLabel.text = "Por: $\(item.price)"
         button.setTitle("Comprar", for: .normal)
         setupAttributes(attributes: item.attributes)
     }
@@ -128,9 +129,10 @@ extension View: ViewConfiguration {
 
     func setupAttributes(attributes: [Attributes]) {
         for item in attributes {
+            guard let name = item.name, let value = item.valueName else { return }
             let label = UILabel()
             label.font = .systemFont(ofSize: 14)
-            label.text = "\(item.name): \(item.valueName)"
+            label.text = "\(name): \(value)"
             attributesStackView.addArrangedSubview(label)
         }
     }

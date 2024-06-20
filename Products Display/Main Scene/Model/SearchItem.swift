@@ -20,8 +20,10 @@ public struct Results: Decodable {
         case price
         case attributes
     }
+
     let id, title, thumbnail: String
-    let price, availableQuantity: Int
+    let price: Double
+    let availableQuantity: Int
     let attributes: [Attributes]
 }
 
@@ -30,6 +32,7 @@ struct Attributes: Decodable {
         case valueName = "value_name"
         case name
     }
-    let name: String
-    let valueName: String
+
+    let name: String?
+    let valueName: String?
 }
