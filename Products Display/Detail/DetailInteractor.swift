@@ -7,11 +7,11 @@
 
 import UIKit
 
-protocol DetailInteractorProtocol {
+protocol DetailImageFetcherProtocol {
     func image(from path: String) async -> UIImage
 }
 
-final class DetailInteractor: DetailInteractorProtocol {
+final class DetailImageFetcher: DetailImageFetcherProtocol {
     func image(from path: String) async -> UIImage {
         guard let url = URL(string: path) else { return UIImage(named: "no-image.jpg")! }
         do {

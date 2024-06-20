@@ -9,8 +9,8 @@ import UIKit
 
 struct DetailInitializer {
     static func make(item: ItemViewModel) -> UIViewController{
-        let interactor = DetailInteractor()
-        return DetailViewController(interactor: interactor, item: item)
+        let imageFetcher = DetailImageFetcher()
+        return DetailViewController(imageFetcher: imageFetcher, item: item)
     }
 }
 

@@ -12,7 +12,7 @@ class View: UIView {
     let stackView: UIStackView = {
         let stackView = UIStackView(frame: CGRect(x: 10, y: 20, width: UIScreen.main.bounds.size.width - 20, height: UIScreen.main.bounds.size.height - 100))
         stackView.axis = .vertical
-        stackView.alignment = .leading
+        stackView.alignment = .fill
         stackView.spacing = 12
         return stackView
     }()
@@ -31,13 +31,39 @@ class View: UIView {
 
     private lazy var idLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 10)
+        label.font = .systemFont(ofSize: 14)
+        return label
+    }()
+
+    private lazy var conditionLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 14)
         return label
     }()
 
     private lazy var buyingModeLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14)
+        return label
+    }()
+
+    private lazy var sellerLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 14)
+        return label
+    }()
+
+    private lazy var attributesStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .fill
+        stackView.spacing = 12
+        return stackView
+    }()
+
+    private lazy var priceLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 24)
         return label
     }()
 
@@ -60,9 +86,12 @@ class View: UIView {
     }
 
     func render(item: ItemViewModel) {
+        image.image = item.image
         titleLabel.text = item.title
-        idLabel.text = item.id
+        idLabel.text = "Id: \(item.id)"
         buyingModeLabel.text = item.buyingMode
+        sellerLabel.text = item.seller?.nickname
+        priceLabel.text = "Por: ARS \(item.price)"
         button.setTitle("Comprar", for: .normal)
         image.image = item.image
     }
@@ -78,6 +107,7 @@ extension View: ViewConfiguration {
         stackView.addArrangedSubview(titleLabel)
         stackView.addArrangedSubview(idLabel)
         stackView.addArrangedSubview(buyingModeLabel)
+        stackView.addArrangedSubview(priceLabel)
         stackView.addArrangedSubview(button)
     }
 
