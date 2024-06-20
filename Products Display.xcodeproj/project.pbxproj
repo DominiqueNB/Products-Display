@@ -108,10 +108,9 @@
 				268ED43F2C223F2600A34A50 /* Initializer.swift */,
 				268ED43D2C21C0A500A34A50 /* Interactor.swift */,
 				268ED4412C223F6500A34A50 /* Presenter.swift */,
-				26D5113B2C237347007746D0 /* ItemViewModel.swift */,
-				26D5112E2C224925007746D0 /* SearchItem.swift */,
 				26D511302C230818007746D0 /* Service.swift */,
 				268ED4212C20EB3800A34A50 /* ViewController.swift */,
+				26D511412C24A4F7007746D0 /* Model */,
 			);
 			path = "Main Scene";
 			sourceTree = "<group>";
@@ -133,6 +132,15 @@
 				26D511392C23276D007746D0 /* View.swift */,
 			);
 			path = Detail;
+			sourceTree = "<group>";
+		};
+		26D511412C24A4F7007746D0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				26D5113B2C237347007746D0 /* ItemViewModel.swift */,
+				26D5112E2C224925007746D0 /* SearchItem.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

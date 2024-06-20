@@ -41,7 +41,7 @@ class View: UIView {
         return label
     }()
 
-    private lazy var buyingModeLabel: UILabel = {
+    private lazy var availableQuantityLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14)
         return label
@@ -89,11 +89,10 @@ class View: UIView {
         image.image = item.image
         titleLabel.text = item.title
         idLabel.text = "Id: \(item.id)"
-        buyingModeLabel.text = item.buyingMode
-        sellerLabel.text = item.seller?.nickname
-        priceLabel.text = "Por: ARS \(item.price)"
+        availableQuantityLabel.text = "Quantidade: \(item.availableQuantity)"
+        priceLabel.text = "Por: $ \(item.price)"
         button.setTitle("Comprar", for: .normal)
-        image.image = item.image
+        setupAttributes(attributes: item.attributes)
     }
 
     func updateImage(_ downloadedImage: UIImage) {
@@ -106,7 +105,8 @@ extension View: ViewConfiguration {
         stackView.addArrangedSubview(image)
         stackView.addArrangedSubview(titleLabel)
         stackView.addArrangedSubview(idLabel)
-        stackView.addArrangedSubview(buyingModeLabel)
+        stackView.addArrangedSubview(availableQuantityLabel)
+        stackView.addArrangedSubview(attributesStackView)
         stackView.addArrangedSubview(priceLabel)
         stackView.addArrangedSubview(button)
     }
@@ -124,5 +124,14 @@ extension View: ViewConfiguration {
 
     func setupStyle() {
         backgroundColor = .white
+    }
+
+    func setupAttributes(attributes: [Attributes]) {
+        for item in attributes {
+            let label = UILabel()
+            label.font = .systemFont(ofSize: 14)
+            label.text = "\(item.name): \(item.valueName)"
+            attributesStackView.addArrangedSubview(label)
+        }
     }
 }

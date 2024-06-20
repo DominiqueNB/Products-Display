@@ -57,20 +57,10 @@ private extension Array where Element == Results {
         map {
             .init(id: $0.id,
                   title: $0.title,
-                  catalogProductID: $0.catalogProductID,
-                  buyingMode: $0.buyingMode,
-                  siteID: $0.siteID,
-                  categoryID: $0.categoryID,
-                  domainID: $0.domainID,
-                  thumbnail: $0.thumbnail,
-                  orderBackend: $0.orderBackend,
+                  thumbnail: $0.title,
                   price: $0.price,
                   availableQuantity: $0.availableQuantity,
-                  useThumbnailID: $0.useThumbnailID,
-                  acceptsMercadopago: $0.acceptsMercadopago,
-                  seller: $0.seller,
-                  installments: $0.installments,
-                  attribute: $0.attribute)
+                  attributes: $0.attributes)
         }
     }
 }

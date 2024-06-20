@@ -10,7 +10,7 @@ import Foundation
 protocol PresenterProtocol {
     func presentItems()
     func present(errorMessage: String)
-    func presentDetailed(_ item: ItemViewModel)
+    func presentDetailed(_ item: Results)
 }
 
 final class Presenter: PresenterProtocol {
@@ -29,7 +29,14 @@ final class Presenter: PresenterProtocol {
         viewController?.renderError(message: errorMessage)
     }
 
-    func presentDetailed(_ item: ItemViewModel) {
+    func presentDetailed(_ item: Results) {
+        let item = ItemViewModel(id: item.id,
+                                 title: item.title,
+                                 thumbnail: item.thumbnail,
+                                 price: "\(item.price)",
+                                 availableQuantity: "\(item.availableQuantity)",
+                                 attributes: item.attributes)
+
         coordinator.navigateToDetail(item: item)
     }
 }

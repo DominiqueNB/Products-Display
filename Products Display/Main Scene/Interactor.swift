@@ -40,6 +40,6 @@ final class Interactor: InteractorProtocol {
     }
 
     func didSelectItem(at index: Int) {
-        presenter.presentDetailed(ItemViewModel(item: items[index]))
+        presenter.presentDetailed(items[index])
     }
 }
