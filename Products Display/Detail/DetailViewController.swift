@@ -14,8 +14,10 @@ final class DetailViewController: UIViewController {
     }()
 
     private let item: ItemViewModel
+    private let interactor: DetailInteractorProtocol
 
-    init(item: ItemViewModel) {
+    init(interactor: DetailInteractorProtocol, item: ItemViewModel) {
+        self.interactor = interactor
         self.item = item
         super.init(nibName: nil, bundle: nil)
     }
@@ -34,5 +36,12 @@ final class DetailViewController: UIViewController {
         super.viewDidLoad()
 
         detailView.render(item: item)
+        updateItem()
+    }
+
+    func updateItem() {
+        Task {
+            await detailView.updateImage(interactor.image(from: item.thumbnail))
+        }
     }
 }

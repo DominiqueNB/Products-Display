@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct ItemViewModel {
     let id, title, catalogProductID, buyingMode, siteID, categoryID, domainID, thumbnail: String
@@ -14,6 +15,7 @@ struct ItemViewModel {
     let seller: Seller?
     let installments: Installments?
     let attribute: Attribute?
+    var image: UIImage?
 
     init(item: Results) {
         self.id = item.id ?? ""

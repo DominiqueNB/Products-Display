@@ -17,6 +17,12 @@ class View: UIView {
         return stackView
     }()
 
+    private lazy var image: UIImageView = {
+        let image = UIImageView()
+        image.contentMode = .scaleAspectFit
+        return image
+    }()
+
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 24)
@@ -58,11 +64,17 @@ class View: UIView {
         idLabel.text = item.id
         buyingModeLabel.text = item.buyingMode
         button.setTitle("Comprar", for: .normal)
+        image.image = item.image
+    }
+
+    func updateImage(_ downloadedImage: UIImage) {
+        image.image = downloadedImage
     }
 }
 extension View: ViewConfiguration {
     func addSubviews() {
         addSubview(stackView)
+        stackView.addArrangedSubview(image)
         stackView.addArrangedSubview(titleLabel)
         stackView.addArrangedSubview(idLabel)
         stackView.addArrangedSubview(buyingModeLabel)

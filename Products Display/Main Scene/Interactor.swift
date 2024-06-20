@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 protocol InteractorProtocol {
     var items: [Results] { get }
@@ -39,8 +40,6 @@ final class Interactor: InteractorProtocol {
     }
 
     func didSelectItem(at index: Int) {
-        let item = items[index]
-
-        presenter.presentDetailed(item)
+        presenter.presentDetailed(ItemViewModel(item: items[index]))
     }
 }
