@@ -39,7 +39,7 @@ final class DetailViewController: UIViewController {
         updateImage()
     }
 
-    func updateImage() {
+    private func updateImage() {
         Task {
             await detailView.updateImage(imageFetcher.image(from: item.thumbnail))
         }

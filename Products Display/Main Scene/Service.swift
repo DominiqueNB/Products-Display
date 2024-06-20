@@ -44,7 +44,7 @@ public final class Service: ServiceProtocol {
 
     private static func map(_ data: Data, from response: HTTPURLResponse) -> Result {
         do {
-            let items = try ItemsMapper.map(data, from: response) ?? []
+            let items = try ItemsMapper.map(data, from: response)
             return .success(items)
         } catch {
             return .failure(Error.invalidData)

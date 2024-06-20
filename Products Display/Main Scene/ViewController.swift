@@ -71,7 +71,7 @@ final class ViewController: UIViewController, ViewControllerProtocol {
         } else if let textFieldText = textField.text, textFieldText.isEmpty == false {
             term = textFieldText
         } else {
-            return
+            interactor.clearItems()
         }
         interactor.search(term)
     }

@@ -12,7 +12,7 @@ class View: UIView {
     let stackView: UIStackView = {
         let stackView = UIStackView(frame: CGRect(x: 10, y: 20, width: UIScreen.main.bounds.size.width - 20, height: UIScreen.main.bounds.size.height - 100))
         stackView.axis = .vertical
-        stackView.alignment = .fill
+        stackView.alignment = .leading
         stackView.spacing = 12
         return stackView
     }()
@@ -116,6 +116,8 @@ extension View: ViewConfiguration {
         NSLayoutConstraint.activate([
             stackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             stackView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+
+            image.centerXAnchor.constraint(equalTo: self.centerXAnchor),
 
             button.heightAnchor.constraint(equalToConstant: 40),
             button.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -40),

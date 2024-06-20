@@ -12,6 +12,7 @@ protocol InteractorProtocol {
     var items: [Results] { get }
     func search(_ term: String)
     func didSelectItem(at index: Int)
+    func clearItems()
 }
 
 final class Interactor: InteractorProtocol {
@@ -22,6 +23,11 @@ final class Interactor: InteractorProtocol {
     init(presenter: PresenterProtocol, service: ServiceProtocol) {
         self.presenter = presenter
         self.service = service
+    }
+
+    func clearItems() {
+        items.removeAll()
+        presenter.presentItems()
     }
 
     func search(_ term: String) {
