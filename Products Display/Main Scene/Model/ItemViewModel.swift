@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-struct ItemViewModel {
+struct ItemViewModel: Equatable {
     let id, title, thumbnail: String
     let price, availableQuantity: String
     let attributes: [Attributes]

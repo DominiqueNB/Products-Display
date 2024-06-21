@@ -13,7 +13,7 @@ struct Search: Decodable {
 }
 
 // MARK: - Results
-public struct Results: Decodable {
+public struct Results: Decodable, Equatable {
     enum CodingKeys: String, CodingKey {
         case availableQuantity = "available_quantity"
         case id, title, thumbnail
@@ -27,7 +27,7 @@ public struct Results: Decodable {
     let attributes: [Attributes]
 }
 
-struct Attributes: Decodable {
+struct Attributes: Decodable, Equatable {
     enum CodingKeys: String, CodingKey {
         case valueName = "value_name"
         case name
